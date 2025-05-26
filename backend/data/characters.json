@@ -1,0 +1,8 @@
+{
+  "name": "Batman",
+  "alignment": "hero",
+  "hasPowers": false,
+  "universe": "bat-family",
+  "origin": "earth",
+  "weaponType": "gadgets"
+}
