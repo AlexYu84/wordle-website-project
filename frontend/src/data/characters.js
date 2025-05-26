@@ -1,26 +1,28 @@
-export const characters = [
+const characters = [
   {
-    name: 'Batman',
-    alignment: 'hero',
+    name: "Batman",
+    family: "Bat-Family",
     hasPowers: false,
-    universe: 'bat-family',
-    origin: 'earth',
-    weaponType: 'gadgets'
+    alignment: "Hero",
   },
   {
-    name: 'Superman',
-    alignment: 'hero',
+    name: "Superman",
+    family: "Super-Family",
     hasPowers: true,
-    universe: 'justice league',
-    origin: 'alien',
-    weaponType: 'none'
+    alignment: "Hero",
   },
   {
-    name: 'Harley Quinn',
-    alignment: 'anti-hero',
+    name: "Joker",
+    family: "Bat-Family",
     hasPowers: false,
-    universe: 'suicide squad',
-    origin: 'earth',
-    weaponType: 'bat'
+    alignment: "Villain",
+  },
+  {
+    name: "Wonder Woman",
+    family: "Wonder-Family",
+    hasPowers: true,
+    alignment: "Hero",
   }
 ];
+
+export default characters;
