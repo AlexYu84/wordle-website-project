@@ -1,41 +1,67 @@
-import React, { useState } from 'react';
-import { characters } from '../data/characters';
-import { getCharacterFeedback } from '../utils/getCharacterFeedback';
-import CharacterFeedback from './CharacterFeedback';
+import React, { useState, useEffect } from "react";
+import characters from "../data/characters";
+import { getCharacterFeedback } from "../utils/getCharacterFeedback";
+import CharacterFeedback from "./CharacterFeedback";
 
-const CharacterGuessForm = () => {
-  const [guessName, setGuessName] = useState('');
-  const [feedback, setFeedback] = useState(null);
-  const target = characters[0]; // Hardcoded for now (e.g. Batman)
+export default function CharacterGuessForm() {
+  const [guessName, setGuessName] = useState("");
+  const [target, setTarget] = useState(null);
+  const [guesses, setGuesses] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
+
+  useEffect(() => {
+    const randomCharacter = characters[Math.floor(Math.random() * characters.length)];
+    setTarget(randomCharacter);
+  }, []);
 
   const handleGuess = (e) => {
     e.preventDefault();
-    const guess = characters.find((char) => char.name.toLowerCase() === guessName.toLowerCase());
-    if (!guess) {
-      alert('Character not found!');
-      return;
-    }
+    if (gameOver || guesses.length >= 6) return;
 
-    const result = getCharacterFeedback(guess, target);
-    setFeedback(result);
+    const guess = characters.find(c => c.name.toLowerCase() === guessName.toLowerCase());
+    if (!guess) return alert("Character not found!");
+
+    const feedback = getCharacterFeedback(guess, target);
+    const newGuesses = [...guesses, { name: guess.name, feedback }];
+    setGuesses(newGuesses);
+    setGuessName("");
+
+    const allMatch = feedback.every(f => f.match === "correct");
+    if (allMatch) {
+      alert("🎉 You guessed it!");
+      setGameOver(true);
+    } else if (newGuesses.length >= 6) {
+      alert(`❌ Game Over! The answer was ${target.name}`);
+      setGameOver(true);
+    }
   };
 
   return (
     <div>
       <form onSubmit={handleGuess}>
-        <label>Guess the DC character:</label>
         <input
           type="text"
+          list="characters"
           value={guessName}
           onChange={(e) => setGuessName(e.target.value)}
-          placeholder="e.g., Superman"
+          disabled={gameOver}
         />
-        <button type="submit">Submit Guess</button>
+        <datalist id="characters">
+          {characters.map((char, i) => (
+            <option key={i} value={char.name} />
+          ))}
+        </datalist>
+        <button type="submit" disabled={gameOver || !guessName}>Guess</button>
       </form>
 
-      {feedback && <CharacterFeedback feedback={feedback} />}
+      <div>
+        {guesses.map((g, idx) => (
+          <div key={idx}>
+            <h4>Guess {idx + 1}: {g.name}</h4>
+            <CharacterFeedback feedback={g.feedback} />
+          </div>
+        ))}
+      </div>
     </div>
   );
-};
-
-export default CharacterGuessForm;
+}
