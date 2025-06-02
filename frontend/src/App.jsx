@@ -1,5 +1,5 @@
 import React from "react";
-import CharacterGuessForm from "./components/CharacterGuessForm";
+import CharacterGuessForm from "./components/characterGuessForm";
 
 function App() {
   return (

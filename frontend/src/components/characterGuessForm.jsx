@@ -28,10 +28,10 @@ export default function CharacterGuessForm() {
 
     const allMatch = feedback.every(f => f.match === "correct");
     if (allMatch) {
-      alert("🎉 You guessed it!");
+      alert("You guessed it!");
       setGameOver(true);
     } else if (newGuesses.length >= 6) {
-      alert(`❌ Game Over! The answer was ${target.name}`);
+      alert(`Game Over! The answer was ${target.name}`);
       setGameOver(true);
     }
   };
