@@ -1,9 +1,21 @@
 const express = require('express');
 const cors = require('cors');
-const gameRoutes = require('./routes/game');
+const charactersRoute = require('./routes/characters');
+const characters = require('./data/characters.json');
+
 
 const app = express();
-app.use(cors());
-app.use('/api', gameRoutes);
+const PORT = 3000;
 
-app.listen(3001, () => console.log('Server running on port 3001'));
+app.use(cors()); // Allows frontend to access backend
+app.use(express.json());
+
+app.use('/api/characters', charactersRoute);
+
+app.get('/api/characters', (req, res) => {
+  res.json(characters);
+});
+
+app.listen(PORT, () => {
+  console.log(`Backend server running at http://localhost:${PORT}`);
+});

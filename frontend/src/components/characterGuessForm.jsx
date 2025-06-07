@@ -1,38 +1,47 @@
 import React, { useState, useEffect } from "react";
-import characters from "../data/characters";
 import { getCharacterFeedback } from "../utils/getCharacterFeedback";
 import CharacterFeedback from "./CharacterFeedback";
 
 export default function CharacterGuessForm() {
+  const [characters, setCharacters] = useState([]);
   const [guessName, setGuessName] = useState("");
-  const [target, setTarget] = useState(null);
   const [guesses, setGuesses] = useState([]);
-  const [gameOver, setGameOver] = useState(false);
+  const [target, setTarget] = useState(null);
 
   useEffect(() => {
-    const randomCharacter = characters[Math.floor(Math.random() * characters.length)];
-    setTarget(randomCharacter);
+    // Fetch characters from backend
+    fetch("http://localhost:3000/api/characters") // Or just '/api/characters' if using Vite proxy
+      .then((res) => res.json())
+      .then((data) => {
+        setCharacters(data);
+
+        // Pick a random target character
+        const randomChar = data[Math.floor(Math.random() * data.length)];
+        setTarget(randomChar);
+      })
+      .catch((err) => {
+        console.error("Error fetching character data:", err);
+      });
   }, []);
 
   const handleGuess = (e) => {
     e.preventDefault();
-    if (gameOver || guesses.length >= 6) return;
+    if (!target || guesses.length >= 6) return;
 
-    const guess = characters.find(c => c.name.toLowerCase() === guessName.toLowerCase());
-    if (!guess) return alert("Character not found!");
+    const guess = characters.find((char) => char.name.toLowerCase() === guessName.toLowerCase());
+    if (!guess) {
+      alert("Character not found");
+      return;
+    }
 
     const feedback = getCharacterFeedback(guess, target);
-    const newGuesses = [...guesses, { name: guess.name, feedback }];
-    setGuesses(newGuesses);
+    setGuesses([...guesses, { name: guess.name, feedback }]);
     setGuessName("");
 
-    const allMatch = feedback.every(f => f.match === "correct");
-    if (allMatch) {
-      alert("You guessed it!");
-      setGameOver(true);
-    } else if (newGuesses.length >= 6) {
-      alert(`Game Over! The answer was ${target.name}`);
-      setGameOver(true);
+    if (feedback.every(f => f.match === "correct")) {
+      alert("You guessed the correct character!");
+    } else if (guesses.length === 5) {
+      alert(`Game Over! The answer was ${target.name}.`);
     }
   };
 
@@ -40,28 +49,25 @@ export default function CharacterGuessForm() {
     <div>
       <form onSubmit={handleGuess}>
         <input
-          type="text"
           list="characters"
           value={guessName}
           onChange={(e) => setGuessName(e.target.value)}
-          disabled={gameOver}
+          placeholder="Guess a character"
         />
         <datalist id="characters">
           {characters.map((char, i) => (
             <option key={i} value={char.name} />
           ))}
         </datalist>
-        <button type="submit" disabled={gameOver || !guessName}>Guess</button>
+        <button type="submit">Guess</button>
       </form>
 
-      <div>
-        {guesses.map((g, idx) => (
-          <div key={idx}>
-            <h4>Guess {idx + 1}: {g.name}</h4>
-            <CharacterFeedback feedback={g.feedback} />
-          </div>
-        ))}
-      </div>
+      {guesses.map((g, idx) => (
+        <div key={idx}>
+          <h4>Guess {idx + 1}: {g.name}</h4>
+          <CharacterFeedback feedback={g.feedback} />
+        </div>
+      ))}
     </div>
   );
 }
