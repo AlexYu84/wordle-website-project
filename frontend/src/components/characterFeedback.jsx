@@ -1,5 +1,5 @@
 import React from 'react';
-import './CharacterFeedback.css'; // Optional: if you're styling this component separately
+import './characterFeedback.css'; 
 
 const CharacterFeedback = ({ feedback }) => {
   return (

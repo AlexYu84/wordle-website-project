@@ -1,8 +1,137 @@
-{
-  "name": "Batman",
-  "alignment": "hero",
-  "hasPowers": false,
-  "universe": "bat-family",
-  "origin": "earth",
-  "weaponType": "gadgets"
-}
+[
+  {
+    "name": "Batman",
+    "alignment": "hero",
+    "hasPowers": false,
+    "city": "Gotham City",
+    "origin": "earth",
+    "weaponType": "gadgets",
+    "species": "human"
+  },
+  {
+    "name": "Superman",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "Metropolis",
+    "origin": "krypton",
+    "weaponType": "none",
+    "species": "kryptonian"
+  },
+  {
+    "name": "Wonder Woman",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "Themyscira",
+    "origin": "themyscira",
+    "weaponType": "sword",
+    "species": "amazon"
+  },
+  {
+    "name": "The Flash",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "Central City",
+    "origin": "earth",
+    "weaponType": "none",
+    "species": "meta-human"
+  },
+  {
+    "name": "Green Lantern",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "Coast City",
+    "origin": "earth",
+    "weaponType": "ring",
+    "species": "human"
+  },
+  {
+    "name": "Aquaman",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "Atlantis",
+    "origin": "atlantis",
+    "weaponType": "trident",
+    "species": "atlantean"
+  },
+  {
+    "name": "Cyborg",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "Detroit",
+    "origin": "earth",
+    "weaponType": "tech",
+    "species": "cyborg"
+  },
+  {
+    "name": "Joker",
+    "alignment": "villain",
+    "hasPowers": false,
+    "city": "Gotham City",
+    "origin": "earth",
+    "weaponType": "gadgets",
+    "species": "human"
+  },
+  {
+    "name": "Lex Luthor",
+    "alignment": "villain",
+    "hasPowers": false,
+    "city": "Metropolis",
+    "origin": "earth",
+    "weaponType": "tech",
+    "species": "human"
+  },
+  {
+    "name": "Harley Quinn",
+    "alignment": "villain",
+    "hasPowers": false,
+    "city": "Gotham City",
+    "origin": "earth",
+    "weaponType": "melee",
+    "species": "human"
+  },
+  {
+    "name": "Catwoman",
+    "alignment": "anti-hero",
+    "hasPowers": false,
+    "city": "Gotham City",
+    "origin": "earth",
+    "weaponType": "whip",
+    "species": "human"
+  },
+  {
+    "name": "Black Adam",
+    "alignment": "anti-hero",
+    "hasPowers": true,
+    "city": "Kahndaq",
+    "origin": "earth",
+    "weaponType": "magic",
+    "species": "meta-human"
+  },
+  {
+    "name": "Shazam",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "Philadelphia",
+    "origin": "earth",
+    "weaponType": "magic",
+    "species": "meta-human"
+  },
+  {
+    "name": "Martian Manhunter",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "None",
+    "origin": "mars",
+    "weaponType": "none",
+    "species": "martian"
+  },
+  {
+    "name": "Deathstroke",
+    "alignment": "villain",
+    "hasPowers": false,
+    "city": "Unknown",
+    "origin": "earth",
+    "weaponType": "sword",
+    "species": "human"
+  }
+]
