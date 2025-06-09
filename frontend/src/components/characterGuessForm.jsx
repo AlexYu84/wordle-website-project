@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getCharacterFeedback } from "../utils/getCharacterFeedback";
 import CharacterFeedback from "./CharacterFeedback";
-import Modal from "./modal"
-
+import "./characterGuessForm.css"
 export default function CharacterGuessForm({ onWin }) {
   const [characters, setCharacters] = useState([]);
   const [guessName, setGuessName] = useState("");
@@ -50,23 +49,24 @@ export default function CharacterGuessForm({ onWin }) {
 
   return (
     <div>
-      <form onSubmit={handleGuess}>
+      <form onSubmit={handleGuess} className="character-guess-form">
         <input
           list="characters"
           value={guessName}
           onChange={(e) => setGuessName(e.target.value)}
-          placeholder="Guess a character"
+          placeholder="Guess the daily DC character"
+          className="character-input"
         />
         <datalist id="characters">
           {characters.map((char, i) => (
             <option key={i} value={char.name} />
           ))}
         </datalist>
-        <button type="submit">Guess</button>
+        <button type="submit" className="character-button">Guess</button>
       </form>
 
       {guesses.map((g, idx) => (
-        <div key={idx}>
+        <div key={idx} className="character-guess-block">
           <h4>Guess {idx + 1}: {g.name}</h4>
           <CharacterFeedback feedback={g.feedback} />
         </div>
