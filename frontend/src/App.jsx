@@ -20,7 +20,7 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif", width: "100%" }}>
+    <div style={{ padding: "2rem", fontFamily: "sans-serif", width: "100%", color: "red" }}>
       <h1>DC Character Wordle</h1>
       {showConfetti && <Confetti />}
       {showModal && <Modal onClose={handleCloseModal} />}
