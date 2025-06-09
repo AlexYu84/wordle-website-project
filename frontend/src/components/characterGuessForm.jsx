@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { getCharacterFeedback } from "../utils/getCharacterFeedback";
 import CharacterFeedback from "./CharacterFeedback";
+import Modal from "./modal"
 
-export default function CharacterGuessForm() {
+export default function CharacterGuessForm({ onWin }) {
   const [characters, setCharacters] = useState([]);
   const [guessName, setGuessName] = useState("");
   const [guesses, setGuesses] = useState([]);
   const [target, setTarget] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
 
   useEffect(() => {
     // Fetch characters from backend
@@ -39,7 +42,7 @@ export default function CharacterGuessForm() {
     setGuessName("");
 
     if (feedback.every(f => f.match === "correct")) {
-      alert("You guessed the correct character!");
+      onWin();
     } else if (guesses.length === 5) {
       alert(`Game Over! The answer was ${target.name}.`);
     }
@@ -68,6 +71,7 @@ export default function CharacterGuessForm() {
           <CharacterFeedback feedback={g.feedback} />
         </div>
       ))}
+      
     </div>
   );
 }
