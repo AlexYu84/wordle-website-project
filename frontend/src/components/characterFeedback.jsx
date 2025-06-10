@@ -1,16 +1,14 @@
-import React from 'react';
-import './characterFeedback.css'; 
+import React from "react";
+import "./CharacterFeedback.css"; // assuming this is your CSS file
 
-const CharacterFeedback = ({ feedback }) => {
+export default function CharacterFeedback({ feedback }) {
   return (
-    <div className="feedback-grid">
-      {feedback.map((f, idx) => (
-        <div key={idx} className={`trait-box ${f.match}`}>
-          <strong>{f.trait}</strong>: {String(f.value)}
+    <div className="feedback-row">
+      {feedback.map((f, index) => (
+        <div key={index} style={{animationDelay: `${index * 0.2}s`}} className={`feedback-item ${f.match}`}>
+          <strong>{f.trait}:</strong> {String(f.value)}
         </div>
       ))}
     </div>
   );
-};
-
-export default CharacterFeedback;
+}

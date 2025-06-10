@@ -22,3 +22,63 @@
   background-color: #f44336;
   color: white;
 }
+
+.feedback-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.feedback-item {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  min-width: 120px;
+  text-align: center;
+  color: black;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.4s forwards;
+}
+
+.feedback-tile.correct {
+  border: 2px solid green;
+}
+.feedback-tile.partial {
+  border: 2px solid orange;
+}
+.feedback-tile.incorrect {
+  border: 2px solid red;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.feedback-item {
+  background-color: #eee;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.feedback-item.correct {
+  background-color: #11ff00;
+  color: black;
+}
+
+.feedback-item.partial {
+  background-color: #ffd900;
+  color: black;
+}
+
+.feedback-item.incorrect {
+  background-color: #ff0000;
+  color: black;
+}

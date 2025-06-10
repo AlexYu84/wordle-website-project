@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { getCharacterFeedback } from "../utils/getCharacterFeedback";
 import CharacterFeedback from "./CharacterFeedback";
-import "./characterGuessForm.css"
+import "./characterGuessForm.css";
+
 export default function CharacterGuessForm({ onWin }) {
   const [characters, setCharacters] = useState([]);
   const [guessName, setGuessName] = useState("");
   const [guesses, setGuesses] = useState([]);
   const [target, setTarget] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-
+  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    // Fetch characters from backend
-    fetch("http://localhost:3000/api/characters") // Or just '/api/characters' if using Vite proxy
+    fetch("http://localhost:3000/api/characters")
       .then((res) => res.json())
       .then((data) => {
         setCharacters(data);
-
-        // Pick a random target character
         const randomChar = data[Math.floor(Math.random() * data.length)];
         setTarget(randomChar);
-      })
-      .catch((err) => {
-        console.error("Error fetching character data:", err);
       });
   }, []);
 
@@ -30,7 +24,9 @@ export default function CharacterGuessForm({ onWin }) {
     e.preventDefault();
     if (!target || guesses.length >= 6) return;
 
-    const guess = characters.find((char) => char.name.toLowerCase() === guessName.toLowerCase());
+    const guess = characters.find(
+      (char) => char.name.toLowerCase() === guessName.toLowerCase()
+    );
     if (!guess) {
       alert("Character not found");
       return;
@@ -39,39 +35,62 @@ export default function CharacterGuessForm({ onWin }) {
     const feedback = getCharacterFeedback(guess, target);
     setGuesses([...guesses, { name: guess.name, feedback }]);
     setGuessName("");
+    setSuggestions([]);
 
-    if (feedback.every(f => f.match === "correct")) {
-      onWin();
+    if (feedback.every((f) => f.match === "correct")) {
+      onWin && onWin();
     } else if (guesses.length === 5) {
       alert(`Game Over! The answer was ${target.name}.`);
     }
   };
 
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setGuessName(value);
+    const filtered = characters.filter((char) =>
+      char.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setSuggestions(filtered.slice(0, 5)); // limit to 5 results
+  };
+
+  const handleSuggestionClick = (name) => {
+    setGuessName(name);
+    setSuggestions([]);
+  };
+
   return (
-    <div>
-      <form onSubmit={handleGuess} className="character-guess-form">
+    <div className="form-container">
+      <form onSubmit={handleGuess} className="guess-form">
         <input
-          list="characters"
+          type="text"
           value={guessName}
-          onChange={(e) => setGuessName(e.target.value)}
-          placeholder="Guess the daily DC character"
-          className="character-input"
+          onChange={handleInputChange}
+          placeholder="Guess a character"
+          className="guess-input"
         />
-        <datalist id="characters">
-          {characters.map((char, i) => (
-            <option key={i} value={char.name} />
-          ))}
-        </datalist>
-        <button type="submit" className="character-button">Guess</button>
+        <button type="submit" className="guess-button">
+          Guess
+        </button>
       </form>
 
+      <div className="suggestion-container">
+        {suggestions.map((char, index) => (
+          <div
+            key={index}
+            className="suggestion-card"
+            onClick={() => handleSuggestionClick(char.name)}
+          >
+            {char.name}
+          </div>
+        ))}
+      </div>
+
       {guesses.map((g, idx) => (
-        <div key={idx} className="character-guess-block">
+        <div key={idx}>
           <h4>Guess {idx + 1}: {g.name}</h4>
           <CharacterFeedback feedback={g.feedback} />
         </div>
       ))}
-      
     </div>
   );
 }
