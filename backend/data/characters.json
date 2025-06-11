@@ -133,5 +133,104 @@
     "origin": "earth",
     "weaponType": "sword",
     "species": "human"
+  },
+    {
+    "name": "Raven",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "Jump City",
+    "origin": "azarath",
+    "weaponType": "magic",
+    "species": "half-demon"
+  },
+  {
+    "name": "Beast Boy",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "Jump City",
+    "origin": "earth",
+    "weaponType": "none",
+    "species": "meta-human"
+  },
+  {
+    "name": "Starfire",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "Jump City",
+    "origin": "tamaran",
+    "weaponType": "energy",
+    "species": "tamaranian"
+  },
+  {
+    "name": "Robin",
+    "alignment": "hero",
+    "hasPowers": false,
+    "city": "Jump City",
+    "origin": "earth",
+    "weaponType": "gadgets",
+    "species": "human"
+  },
+  {
+    "name": "Penguin",
+    "alignment": "villain",
+    "hasPowers": false,
+    "city": "Gotham City",
+    "origin": "earth",
+    "weaponType": "gadgets",
+    "species": "human"
+  },
+  {
+    "name": "Riddler",
+    "alignment": "villain",
+    "hasPowers": false,
+    "city": "Gotham City",
+    "origin": "earth",
+    "weaponType": "traps",
+    "species": "human"
+  },
+  {
+    "name": "Zatanna",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "New York",
+    "origin": "earth",
+    "weaponType": "magic",
+    "species": "human"
+  },
+  {
+    "name": "Doctor Fate",
+    "alignment": "hero",
+    "hasPowers": true,
+    "city": "Salem",
+    "origin": "earth",
+    "weaponType": "magic",
+    "species": "human"
+  },
+  {
+    "name": "Darkseid",
+    "alignment": "villain",
+    "hasPowers": true,
+    "city": "Apokolips",
+    "origin": "apokolips",
+    "weaponType": "omega beams",
+    "species": "new god"
+  },
+  {
+    "name": "Brainiac",
+    "alignment": "villain",
+    "hasPowers": true,
+    "city": "Colu",
+    "origin": "colu",
+    "weaponType": "tech",
+    "species": "coluan"
+  },
+  {
+    "name": "Amazo",
+    "alignment": "villain",
+    "hasPowers": true,
+    "city": "Metropolis",
+    "origin": "earth",
+    "weaponType": "tech",
+    "species": "android"
   }
 ]

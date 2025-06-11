@@ -1,9 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+h1 {
+  font-family: 'Bangers', cursive;
+  color: #ff0;
+  text-shadow: 2px 2px 0 #000, 4px 4px 0 #ff0000;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
+
+body {
+  background-image: url('/comic.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: sans-serif;
+}
+
 
 .logo {
   height: 6em;

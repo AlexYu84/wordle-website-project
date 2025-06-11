@@ -1,28 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
+import Confetti from "react-confetti";
 import CharacterGuessForm from "./components/characterGuessForm";
+import Modal from "./components/modal";
+import './App.css';
+
 
 function App() {
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleWin = () => {
+    setShowConfetti(true);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setShowConfetti(false);
+  };
+
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+    <div style={{ padding: "2rem", fontFamily: "sans-serif", width: "100%", color: "red" }}>
       <h1>DC Character Wordle</h1>
-      <CharacterGuessForm />
+      {showConfetti && <Confetti />}
+      {showModal && <Modal onClose={handleCloseModal} />}
+      <CharacterGuessForm onWin={handleWin} />
     </div>
   );
 }
 
 export default App;
-
-// import { useEffect } from "react";
-
-// function App() {
-//   useEffect(() => {
-//     fetch("http://localhost:3000/api/characters") // or your actual backend port
-//       .then((res) => res.json())
-//       .then((data) => console.log("Characters from backend:", data))
-//       .catch((err) => console.error("Error connecting to backend:", err));
-//   }, []);
-
-//   return <div>Check your console to see if it connected!</div>;
-// }
-
-// export default App;
