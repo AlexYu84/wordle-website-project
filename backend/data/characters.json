@@ -223,5 +223,14 @@
     "origin": "colu",
     "weaponType": "tech",
     "species": "coluan"
+  },
+  {
+    "name": "Amazo",
+    "alignment": "villain",
+    "hasPowers": true,
+    "city": "Metropolis",
+    "origin": "earth",
+    "weaponType": "tech",
+    "species": "android"
   }
 ]
